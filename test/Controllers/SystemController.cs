@@ -24,39 +24,16 @@ namespace test.Controllers
         {
             if (setting == "init")
             {
-                _restaurantRepository.RemoveAllNotes();
-                _restaurantRepository.AddNote(new Restaurant()
+                _restaurantRepository.RemoveAllRestaurants();
+                _restaurantRepository.AddRestaurant(new Restaurant()
                 {
-                    Id = "1",
-                    Body = "Test note 1",
-                    CreatedOn = DateTime.Now,
-                    UpdatedOn = DateTime.Now,
-                    UserId = 1
+                   name= "Tim",
+                   address = "941 Progress Avenue",
+                   cuisine ="Fast food",
+                   timings = "9 to 5"
+                   
                 });
-                _restaurantRepository.AddNote(new Restaurant()
-                {
-                    Id = "2",
-                    Body = "Test note 2",
-                    CreatedOn = DateTime.Now,
-                    UpdatedOn = DateTime.Now,
-                    UserId = 1
-                });
-                _restaurantRepository.AddNote(new Restaurant()
-                {
-                    Id = "3",
-                    Body = "Test note 3",
-                    CreatedOn = DateTime.Now,
-                    UpdatedOn = DateTime.Now,
-                    UserId = 2
-                });
-                _restaurantRepository.AddNote(new Restaurant()
-                {
-                    Id = "4",
-                    Body = "Test note 4",
-                    CreatedOn = DateTime.Now,
-                    UpdatedOn = DateTime.Now,
-                    UserId = 2
-                });
+                
 
                 return "Done";
             }

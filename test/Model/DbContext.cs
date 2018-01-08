@@ -18,7 +18,7 @@ namespace test.Model
                 _database = client.GetDatabase(settings.Value.Database);
         }
 
-        public IMongoCollection<Restaurant> Notes
+        public IMongoCollection<Restaurant> Restaurants
         {
             get
             {

@@ -7,18 +7,17 @@ using System.Threading.Tasks;
 
 namespace test.Model
 {
-    public class Restaurant
+    public class Reviews
     {
 
         [BsonId]
-        public  ObjectId restuarant_id { get; set; }
-
+       
+        public ObjectId review_id { get; set; }
+        public ObjectId menu_id { get; set; }
         public  ObjectId user_id { get; set; }
-        public string name { get; set; }
-        public string address { get; set; }
-        public string cuisine { get; set; }
 
-        public string timings { get; set; }
+        public int stars { get; set; }
 
+        public string review { get; set; }
     }
 }

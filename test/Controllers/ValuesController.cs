@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -23,48 +24,48 @@ namespace test.Controllers
         [HttpGet]
         public Task<string> Get()
         {
-            return GetNoteInternal();
+            return GetRestaurantInternal();
         }
 
-        private async Task<string> GetNoteInternal()
+        private async Task<string> GetRestaurantInternal()
         {
-            var notes = await _restaurantRepositry.GetAllNotes();
-            return JsonConvert.SerializeObject(notes);
+            var restaurants = await _restaurantRepositry.GetAllRestaurants();
+            return JsonConvert.SerializeObject(restaurants);
         }
 
         // GET api/notes/5
         [HttpGet("{id}")]
-        public Task<string> Get(string id)
+        public Task<string> Get(ObjectId id)
         {
-            return GetNoteByIdInternal(id);
+            return GetRestaurantByIdInternal(id);
         }
 
 
-        private async Task<string> GetNoteByIdInternal(string id)
+        private async Task<string> GetRestaurantByIdInternal(ObjectId id)
         {
-            var note = await _restaurantRepositry.GetNote(id) ?? new Restaurant();
-            return JsonConvert.SerializeObject(note);
+            var restaurant = await _restaurantRepositry.GetRestaurant(id) ?? new Restaurant();
+            return JsonConvert.SerializeObject(restaurant);
         }
 
         // POST api/notes
         [HttpPost]
-        public void Post([FromBody]string value)
+        public void Post([FromBody]Restaurant value)
         {
-            _restaurantRepositry.AddNote(new Restaurant()
-            { Body = value, CreatedOn = DateTime.Now, UpdatedOn = DateTime.Now });
+            _restaurantRepositry.AddRestaurant(new Restaurant()
+            { name = value.address, address = value.address, cuisine = value.cuisine, timings = value.timings });
         }
 
         // PUT api/notes/5
         [HttpPut("{id}")]
-        public void Put(string id, [FromBody]string value)
+        public void Put(ObjectId id, [FromBody]Restaurant value)
         {
-            _restaurantRepositry.UpdateNote(id, value);
+            _restaurantRepositry.UpdateRestaurant(id, value);
         }
 
         // DELETE api/notes/5
-        public void Delete(string id)
+        public void Delete(ObjectId id)
         {
-            _restaurantRepositry.RemoveNote(id);
+            _restaurantRepositry.RemoveRestaurant(id);
         }
     }
 }
